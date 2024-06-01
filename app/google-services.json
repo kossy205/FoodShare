@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "504984308975",
+    "project_id": "foodshare-bb8ae",
+    "storage_bucket": "foodshare-bb8ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504984308975:android:0805e682d7f5e5a10b9f1a",
+        "android_client_info": {
+          "package_name": "com.kosiso.foodshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgNwrRp1J0Vq2cdq3JNrLMsp9rFQXeSRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
