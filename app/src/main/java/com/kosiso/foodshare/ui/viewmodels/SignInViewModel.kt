@@ -5,12 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
+import com.kosiso.foodshare.models.User
 import com.kosiso.foodshare.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel(){
+class SignInViewModel @Inject constructor(val mainRepository: MainRepository): ViewModel(){
 
 
     private val _messageFromViewModel = MutableLiveData<String>()

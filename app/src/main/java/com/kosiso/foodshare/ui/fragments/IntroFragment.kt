@@ -10,7 +10,7 @@ import com.kosiso.foodshare.R
 import com.kosiso.foodshare.databinding.FragmentIntroBinding
 
 
-class IntroFragment : Fragment() {
+class IntroFragment : Fragment(R.layout.fragment_intro) {
 
     private lateinit var binding: FragmentIntroBinding
     override fun onCreateView(
