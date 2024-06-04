@@ -32,6 +32,10 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Set status bar color
+        requireActivity().window.statusBarColor = resources.getColor(R.color.white)
+        // Set navigation bar color
+        requireActivity().window.navigationBarColor = resources.getColor(R.color.white)
 
         binding.btnSignIn.setOnClickListener {
             binding.btnSignIn.visibility = View.GONE

@@ -33,6 +33,10 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Set status bar color
+        requireActivity().window.statusBarColor = resources.getColor(R.color.white)
+        // Set navigation bar color
+        requireActivity().window.navigationBarColor = resources.getColor(R.color.white)
 
         setSignUpOptionsDropdown()
 

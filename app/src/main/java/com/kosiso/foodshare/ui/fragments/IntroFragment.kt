@@ -24,6 +24,10 @@ class IntroFragment : Fragment(R.layout.fragment_intro) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Set status bar color
+        requireActivity().window.statusBarColor = resources.getColor(R.color.white)
+        // Set navigation bar color
+        requireActivity().window.navigationBarColor = resources.getColor(R.color.white)
 
         binding.btnSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_introFragment_to_signInFragment)
