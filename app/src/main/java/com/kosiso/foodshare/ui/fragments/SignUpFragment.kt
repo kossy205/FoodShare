@@ -37,6 +37,8 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
         setSignUpOptionsDropdown()
 
         binding.btnSignUp.setOnClickListener {
+            binding.btnSignUp.visibility = View.GONE
+            binding.cvLoading.visibility = View.VISIBLE
             val firstName: String = binding.etFirstName.text.toString().trim { it <= ' ' }
             val lastName: String = binding.etLastName.text.toString().trim { it <= ' ' }
             val phone: Long? = binding.etCountryCode.text.toString().trim { it <= ' ' }.toLongOrNull()
@@ -51,7 +53,13 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
         })
 
         signUpViewmodel.signupResult.observe(viewLifecycleOwner, Observer {result->
-            if (result.isSuccess) findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+            if (result.isSuccess){
+                binding.cvLoading.visibility = View.GONE
+                findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+            }else{
+                binding.btnSignUp.visibility = View.VISIBLE
+                binding.cvLoading.visibility = View.GONE
+            }
         })
 
     }

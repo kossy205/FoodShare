@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -10,24 +11,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Base.Theme.FoodShare"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.BaseActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".ui.activities.SignInActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.SignUpActivity"
-            android:exported="false" />
+            android:name=".ui.activities.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/AppTheme.Fullscreen" />
         <activity
             android:name=".ui.activities.MainActivity"
-            android:launchMode="singleTask"
             android:exported="true"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.FoodShare">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

@@ -57,7 +57,7 @@ class SignUpViewModel @Inject constructor(val mainRepository: MainRepository): V
                 }
                 .addOnFailureListener {exception->
 
-                    _messageFromViewModel.value = "unable to sign up"
+                    _messageFromViewModel.value = exception.message!!
                     Log.d("sign up exception", exception.message!!)
                 }
         }

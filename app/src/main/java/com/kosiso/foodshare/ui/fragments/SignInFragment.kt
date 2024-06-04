@@ -13,7 +13,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.kosiso.foodshare.R
 import com.kosiso.foodshare.databinding.FragmentSignInBinding
 import com.kosiso.foodshare.ui.viewmodels.SignInViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private lateinit var binding:FragmentSignInBinding
@@ -32,6 +34,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSignIn.setOnClickListener {
+            binding.btnSignIn.visibility = View.GONE
+            binding.cvLoading.visibility = View.VISIBLE
             val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
             val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
             signInViewModel.signIn(email, password)
@@ -41,7 +45,13 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             showErrorSnackBar(it.toString())
         })
         signInViewModel.signInResult.observe(viewLifecycleOwner, Observer {result->
-            if (result.isSuccess) findNavController().navigate(R.id.action_signInFragment_to_majorFragment)
+            if (result.isSuccess){
+                binding.cvLoading.visibility = View.GONE
+                findNavController().navigate(R.id.action_signInFragment_to_majorFragment)
+            }else{
+                binding.cvLoading.visibility = View.GONE
+                binding.btnSignIn.visibility = View.VISIBLE
+            }
         })
 
     }
