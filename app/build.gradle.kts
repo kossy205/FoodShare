@@ -67,7 +67,7 @@ dependencies {
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.android.material:material:1.12.0")
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.activity:activity:1.8.0")
+    implementation ("androidx.activity:activity:1.8.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
     implementation("androidx.fragment:fragment-ktx:1.7.0")
@@ -75,7 +75,8 @@ dependencies {
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
-    
+
+    implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
 
     // The Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
@@ -87,13 +88,16 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.2.0")
     // The dependency for the Cloud Firestore library
     implementation("com.google.firebase:firebase-firestore")
+    // Firebase Storage Dependency
+    implementation ("com.google.firebase:firebase-storage")
 
+
+    // material
+    implementation ("com.google.android.material:material:1.12.0-alpha03")
 
     //splash screen api
-    implementation("androidx.core:core-splashscreen:1.0.0-alpha02")
+    //implementation("androidx.core:core-splashscreen:1.0.0-alpha02")
 
-//    // Material Design
-//    implementation ("com.google.android.material:material:1.12.0-alpha03")
 
     // Architectural Components
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
@@ -140,6 +144,11 @@ dependencies {
     //Dagger - Hilt
     implementation ("com.google.dagger:hilt-android:2.48.1")
     kapt ("com.google.dagger:hilt-android-compiler:2.48.1")
+
+    // Easy Permissions
+    implementation ("pub.devrel:easypermissions:3.0.0")
+
+
 
 //    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 //    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha01"

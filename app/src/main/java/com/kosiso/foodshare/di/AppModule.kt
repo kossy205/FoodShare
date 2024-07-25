@@ -1,5 +1,9 @@
 package com.kosiso.foodshare.di
 
+import android.content.Context
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.kosiso.foodshare.repository.MainRepository
@@ -8,6 +12,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -28,5 +33,19 @@ object AppModule {
     @Provides
     fun provideMainRepository(firebaseAuth: FirebaseAuth, firestore: FirebaseFirestore): MainRepository {
         return MainRepositoryImplementation(firebaseAuth, firestore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFusedLocationClient(@ApplicationContext app: Context):FusedLocationProviderClient{
+        return LocationServices.getFusedLocationProviderClient(app)
+    }
+    @Singleton
+    @Provides
+    fun providelocationRequest():LocationRequest{
+        return LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            interval = 10000 // 5 seconds
+        }
     }
 }

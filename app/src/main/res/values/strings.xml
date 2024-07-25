@@ -3,9 +3,22 @@
 
     <string-array name="signup_options">
         <item>Donor</item>
-        <item>Beneficiary</item>
+        <item>Guest</item>
         <item>Delivery Volunteer</item>
     </string-array>
+
+    <string-array name="foodType_options">
+        <item>Perishable</item>
+        <item>Non-Perishable</item>
+    </string-array>
+
+    <string-array name="filter_options">
+        <item>All</item>
+        <item>Unclaimed</item>
+        <item>Claimed</item>
+        <item>Delivered</item>
+    </string-array>
+
     <string name="google_maps_key">AIzaSyAQfAdRzBnSGS5SMOMuiSFUCnY-4lQQovY</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -13,4 +26,15 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="list_food">List Food</string>
+    <string name="food_requests">Food Requests</string>
+    <string name="listings">Listings</string>
+    <string name="transit">Transit</string>
+    <string name="available_foods">Available</string>
+    <string name="requests">Requests</string>
+    <string name="claimed_foods">Claimed Foods</string>
 </resources>

@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center">
 
         <TextView
@@ -22,7 +22,7 @@
             android:layout_marginStart="8dp"
             android:text="Sign In!\nPlease enter your email and password."
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="@dimen/heading_3_text_size"
             app:layout_constraintBottom_toTopOf="@+id/tilEmail_si"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/background_et"
                 android:ems="10"
-                android:hint="Your email"
+                android:hint="Email"
                 android:imeActionId="1"
                 android:imeOptions="actionSend"
                 android:importantForAutofill="no"
@@ -60,7 +60,7 @@
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="14sp" />
+                android:textSize="@dimen/normal_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -86,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/background_et"
                 android:ems="10"
-                android:hint="password"
+                android:hint="Password"
                 android:imeActionId="1"
                 android:imeOptions="actionSend"
                 android:importantForAutofill="no"
@@ -94,33 +94,18 @@
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="14sp" />
+                android:textSize="@dimen/normal_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!--    <TextView-->
-        <!--        android:id="@+id/tvWeight"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_margin="10dp"-->
-        <!--        android:text="kg"-->
-        <!--        android:textSize="24sp"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintBottom_toBottomOf="@+id/tilWeight"-->
-        <!--        app:layout_constraintLeft_toRightOf="@id/tilWeight"-->
-        <!--        app:layout_constraintTop_toTopOf="@+id/tilWeight"-->
-        <!--        app:layout_constraintHorizontal_weight="1"/>-->
-
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="25dp"
             android:text="Sign In"
-            android:textSize="14sp"
+            android:textSize="@dimen/normal_text_size"
             android:visibility="visible"
-            android:background="@drawable/btn_background"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword_si"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +119,7 @@
             android:layout_height="50dp"
             app:cardCornerRadius="8dp"
             android:layout_marginTop="25dp"
-            app:cardBackgroundColor="@color/blue"
+            app:cardBackgroundColor="@color/main_green"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword_si"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Please wait"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/normal_text_size"
                     android:textColor="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
