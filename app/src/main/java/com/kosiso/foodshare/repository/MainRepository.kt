@@ -9,6 +9,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.UploadTask
 import com.kosiso.foodshare.models.FoodListing
+import com.kosiso.foodshare.models.FoodRequest
 import com.kosiso.foodshare.models.User
 
 interface MainRepository {
@@ -26,5 +27,12 @@ interface MainRepository {
     fun fetchUnclaimedListings(uid: String): Task<QuerySnapshot>
     fun fetchDeliveredListings(uid: String): Task<QuerySnapshot>
     fun fetchSearchedListings(uid: String, searchedText: String): Task<QuerySnapshot>
+    fun fetchPerishableListings(uid: String): Task<QuerySnapshot>
+    fun fetchNonPerishableListings(uid: String): Task<QuerySnapshot>
+    fun postFoodRequest(foodRequest: FoodRequest): Task<Void>
+    fun fetchAllFoodRequests(uid: String): Task<QuerySnapshot>
+    fun fetchOpenFoodRequests(uid: String): Task<QuerySnapshot>
+    fun fetchRedeemedFoodRequests(uid: String): Task<QuerySnapshot>
+    fun fetchCompletedFoodRequests(uid: String): Task<QuerySnapshot>
 
 }

@@ -152,7 +152,6 @@ class ListingsFragment : Fragment() {
         listingsAdapter = ListingsAdapter()
         binding.rvListings.adapter = listingsAdapter
         binding.rvListings.layoutManager = LinearLayoutManager(requireContext())
-
     }
 
 

@@ -19,6 +19,19 @@
         <item>Delivered</item>
     </string-array>
 
+    <string-array name="food_requests_filter_options">
+        <item>All</item>
+        <item>Open</item>
+        <item>Redeemed</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string-array name="available_food_filter_options">
+        <item>All</item>
+        <item>Perishable</item>
+        <item>Non-perishable</item>
+    </string-array>
+
     <string name="google_maps_key">AIzaSyAQfAdRzBnSGS5SMOMuiSFUCnY-4lQQovY</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

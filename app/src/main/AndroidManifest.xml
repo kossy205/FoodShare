@@ -21,19 +21,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodShare"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.activities.BottomNavActivity"
-            android:exported="false"
-            android:label="@string/title_activity_bottom_nav" />
+
         <activity
             android:name=".ui.activities.VolunteerActivity"
             android:exported="false"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.FoodShare" />
         <activity
             android:name=".ui.activities.GuestActivity"
             android:exported="false"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.FoodShare" />
         <activity
             android:name=".ui.activities.DonorActivity"

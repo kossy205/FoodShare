@@ -6,6 +6,8 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.kosiso.foodshare.repository.LocationRepository
+import com.kosiso.foodshare.repository.LocationRepositoryImplementation
 import com.kosiso.foodshare.repository.MainRepository
 import com.kosiso.foodshare.repository.MainRepositoryImplementation
 import dagger.Binds
@@ -37,6 +39,13 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideLocationRepository(fusedLocationProviderClient: FusedLocationProviderClient,
+                                  locationRequest: LocationRequest): LocationRepository {
+        return LocationRepositoryImplementation(fusedLocationProviderClient, locationRequest)
+    }
+
+    @Singleton
+    @Provides
     fun provideFusedLocationClient(@ApplicationContext app: Context):FusedLocationProviderClient{
         return LocationServices.getFusedLocationProviderClient(app)
     }
@@ -45,7 +54,7 @@ object AppModule {
     fun providelocationRequest():LocationRequest{
         return LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 10000 // 5 seconds
+            interval = 5000 // 5 seconds
         }
     }
 }

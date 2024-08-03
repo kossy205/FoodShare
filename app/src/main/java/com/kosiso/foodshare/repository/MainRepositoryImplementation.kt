@@ -14,10 +14,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.kosiso.foodshare.models.FoodListing
+import com.kosiso.foodshare.models.FoodRequest
 import com.kosiso.foodshare.models.User
 import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.other.Utilities
-import java.util.Locale
 import javax.inject.Inject
 
 class MainRepositoryImplementation @Inject constructor(
@@ -70,21 +70,21 @@ class MainRepositoryImplementation @Inject constructor(
     override fun fetchClaimedListings(uid: String): Task<QuerySnapshot> {
         return firestore.collection(Constants.LISTINGS)
             .whereEqualTo(Constants.USER_ID, uid)
-            .whereEqualTo(Constants.LIST_FOOD_STATUS, Constants.CLAIMED_LIST_FOOD)
+            .whereEqualTo(Constants.STATUS, Constants.CLAIMED_LIST_FOOD)
             .get()
     }
 
     override fun fetchUnclaimedListings(uid: String): Task<QuerySnapshot> {
         return firestore.collection(Constants.LISTINGS)
             .whereEqualTo(Constants.USER_ID, uid)
-            .whereEqualTo(Constants.LIST_FOOD_STATUS, Constants.UNCLAIMED_LIST_FOOD)
+            .whereEqualTo(Constants.STATUS, Constants.UNCLAIMED_LIST_FOOD)
             .get()
     }
 
     override fun fetchDeliveredListings(uid: String): Task<QuerySnapshot> {
         return firestore.collection(Constants.LISTINGS)
             .whereEqualTo(Constants.USER_ID, uid)
-            .whereEqualTo(Constants.LIST_FOOD_STATUS, Constants.DELIVERED_LIST_FOOD)
+            .whereEqualTo(Constants.STATUS, Constants.DELIVERED_LIST_FOOD)
             .get()
     }
 
@@ -94,6 +94,53 @@ class MainRepositoryImplementation @Inject constructor(
             .orderBy(Constants.NAME_OF_ITEM)
             .startAt(searchedText)
             .endAt(searchedText + "\uf8ff")
+            .get()
+    }
+
+    override fun fetchPerishableListings(uid: String): Task<QuerySnapshot> {
+        return firestore.collection(Constants.LISTINGS)
+            .whereEqualTo(Constants.USER_ID, uid)
+            .whereEqualTo(Constants.LISTING_CATEGORY, Constants.PERISHABLE_FOODS)
+            .get()
+    }
+
+    override fun fetchNonPerishableListings(uid: String): Task<QuerySnapshot> {
+        return firestore.collection(Constants.LISTINGS)
+            .whereEqualTo(Constants.USER_ID, uid)
+            .whereEqualTo(Constants.LISTING_CATEGORY, Constants.NON_PERISHABLE_FOODS)
+            .get()
+    }
+
+    override fun postFoodRequest(foodRequest: FoodRequest): Task<Void> {
+        return firestore.collection(Constants.FOOD_REQUESTS)
+            .document()
+            .set(foodRequest, SetOptions.merge())
+    }
+
+    override fun fetchAllFoodRequests(uid: String): Task<QuerySnapshot> {
+        return firestore.collection(Constants.FOOD_REQUESTS)
+            .whereEqualTo(Constants.USER_ID, uid)
+            .get()
+    }
+
+    override fun fetchOpenFoodRequests(uid: String): Task<QuerySnapshot> {
+        return firestore.collection(Constants.FOOD_REQUESTS)
+            .whereEqualTo(Constants.USER_ID, uid)
+            .whereEqualTo(Constants.STATUS, Constants.OPEN_FOOD_REQUESTS)
+            .get()
+    }
+
+    override fun fetchRedeemedFoodRequests(uid: String): Task<QuerySnapshot> {
+        return firestore.collection(Constants.FOOD_REQUESTS)
+            .whereEqualTo(Constants.USER_ID, uid)
+            .whereEqualTo(Constants.STATUS, Constants.REDEEMED_FOOD_REQUESTS)
+            .get()
+    }
+
+    override fun fetchCompletedFoodRequests(uid: String): Task<QuerySnapshot> {
+        return firestore.collection(Constants.FOOD_REQUESTS)
+            .whereEqualTo(Constants.USER_ID, uid)
+            .whereEqualTo(Constants.STATUS, Constants.COMPLETED_FOOD_REQUESTS)
             .get()
     }
 

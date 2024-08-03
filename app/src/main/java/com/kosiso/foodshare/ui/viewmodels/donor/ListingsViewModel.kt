@@ -36,8 +36,7 @@ class ListingsViewModel @Inject constructor(val mainRepository: MainRepository):
     private val _messageFromViewModel = MutableLiveData<String>()
     val messageFromViewModel: LiveData<String> = _messageFromViewModel
 
-    private val _filteredList = MutableLiveData<List<FoodListing>>()
-    val filteredList: LiveData<List<FoodListing>> = _filteredList
+
 
 
 

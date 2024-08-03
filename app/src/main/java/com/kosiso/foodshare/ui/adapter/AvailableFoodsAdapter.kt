@@ -6,21 +6,25 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kosiso.foodshare.databinding.ItemListingsBinding
+import com.kosiso.foodshare.databinding.ItemAvailableFoodsBinding
 import com.kosiso.foodshare.models.FoodListing
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
-class ListingsAdapter: RecyclerView.Adapter<ListingsAdapter.ListingsViewHolder>(){
+class AvailableFoodsAdapter: RecyclerView.Adapter<AvailableFoodsAdapter.AvailableFoodsViewHolder>(){
 
-    inner class ListingsViewHolder(val binding: ItemListingsBinding): RecyclerView.ViewHolder(binding.root)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingsViewHolder{
-        val binding = ItemListingsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListingsViewHolder(binding)
+    inner class AvailableFoodsViewHolder(val binding: ItemAvailableFoodsBinding): RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AvailableFoodsViewHolder {
+        val binding = ItemAvailableFoodsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return AvailableFoodsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ListingsAdapter.ListingsViewHolder, position: Int) {
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+    override fun onBindViewHolder(holder: AvailableFoodsViewHolder, position: Int) {
         val foodListing = differ.currentList[position]
 
         holder.binding.apply {
@@ -29,26 +33,16 @@ class ListingsAdapter: RecyclerView.Adapter<ListingsAdapter.ListingsViewHolder>(
             Glide.with(root.context).load(foodListing.foodImg).into(itemFoodImage)
             itemFoodCategory.text = foodListing.listingCategory
             itemFoodWeight.text = "${foodListing.foodWeight}kg"
-            itemFoodStatus.text = foodListing.status
 
             val dateFormat = SimpleDateFormat("dd.mm.yyyy", Locale.getDefault())
             itemFoodPostDate.text = dateFormat.format(foodListing.foodListedTime.toDate())
             itemFoodExpDate.text = "Exp: ${dateFormat.format(foodListing.expiryDate!!.toDate())}"
-
-
         }
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
 
 
-
-    // used to check between two lists old and new and update only content and items that has changed...
-    // instead of rebuilding the whole list again when ever we make changes.
-    // it is very helpful for performance as it reduces lag.
-    val diffCallback = object : DiffUtil.ItemCallback<FoodListing>() {
+    val diffCallback = object: DiffUtil.ItemCallback<FoodListing>(){
         override fun areItemsTheSame(oldItem: FoodListing, newItem: FoodListing): Boolean {
             return oldItem.uniqueId == newItem.uniqueId
         }
@@ -63,4 +57,5 @@ class ListingsAdapter: RecyclerView.Adapter<ListingsAdapter.ListingsViewHolder>(
     fun submitList(list: List<FoodListing>) = differ.submitList(list)
 
     fun currentList() = differ.currentList
+
 }
