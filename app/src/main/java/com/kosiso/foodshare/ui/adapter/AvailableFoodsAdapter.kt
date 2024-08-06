@@ -1,5 +1,6 @@
 package com.kosiso.foodshare.ui.adapter
 
+import FoodListing
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -7,11 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kosiso.foodshare.databinding.ItemAvailableFoodsBinding
-import com.kosiso.foodshare.models.FoodListing
+import com.kosiso.foodshare.other.Utilities
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class AvailableFoodsAdapter: RecyclerView.Adapter<AvailableFoodsAdapter.AvailableFoodsViewHolder>(){
+
+    var onItemClick: ((FoodListing) -> Unit)? = null
 
     inner class AvailableFoodsViewHolder(val binding: ItemAvailableFoodsBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -34,9 +37,15 @@ class AvailableFoodsAdapter: RecyclerView.Adapter<AvailableFoodsAdapter.Availabl
             itemFoodCategory.text = foodListing.listingCategory
             itemFoodWeight.text = "${foodListing.foodWeight}kg"
 
-            val dateFormat = SimpleDateFormat("dd.mm.yyyy", Locale.getDefault())
-            itemFoodPostDate.text = dateFormat.format(foodListing.foodListedTime.toDate())
-            itemFoodExpDate.text = "Exp: ${dateFormat.format(foodListing.expiryDate!!.toDate())}"
+//            val dateFormat = SimpleDateFormat("dd.mm.yyyy", Locale.getDefault())
+//            itemFoodPostDate.text = dateFormat.format(foodListing.foodListedTime.toDate())
+//            itemFoodExpDate.text = "Exp: ${dateFormat.format(foodListing.expiryDate!!.toDate())}"
+
+            itemFoodPostDate.text = Utilities.formatTimeAgo(foodListing.foodListedTime)
+            itemFoodExpDate.text = Utilities.formatTimeAgo(foodListing.foodListedTime)
+        }
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(foodListing)
         }
     }
 

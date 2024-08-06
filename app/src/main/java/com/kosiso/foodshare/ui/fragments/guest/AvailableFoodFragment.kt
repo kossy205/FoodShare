@@ -1,6 +1,7 @@
 package com.kosiso.foodshare.ui.fragments.guest
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,8 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosiso.foodshare.R
 import com.kosiso.foodshare.databinding.FragmentAvailableFoodBinding
-import com.kosiso.foodshare.models.FoodListing
+import FoodListing
+import android.content.Intent
+import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.other.Utilities
+import com.kosiso.foodshare.ui.activities.DonorActivity
 import com.kosiso.foodshare.ui.adapter.AvailableFoodsAdapter
 import com.kosiso.foodshare.ui.viewmodels.guest.AvailableFoodsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -132,6 +136,14 @@ class AvailableFoodFragment : Fragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
+        }
+
+        availableFoodsAdapter.onItemClick = {item->
+            val bundle = Bundle().apply {
+                putParcelable(Constants.ITEM_AVAILABLE_FOOD_DATA_OBJECT, item as Parcelable)
+            }
+            findNavController().navigate(R.id.action_availableFoodFragment2_to_availableFoodDetailsFragment, bundle)
+            Log.i("navigate to details", "${R.id.action_availableFoodFragment2_to_availableFoodDetailsFragment}")
         }
     }
 

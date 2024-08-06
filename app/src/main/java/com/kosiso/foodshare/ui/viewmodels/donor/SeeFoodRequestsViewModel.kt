@@ -1,4 +1,4 @@
-package com.kosiso.foodshare.ui.viewmodels.guest
+package com.kosiso.foodshare.ui.viewmodels.donor
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RequestsViewModel @Inject constructor(val mainRepository: MainRepository): ViewModel(){
+class SeeFoodRequestsViewModel @Inject constructor(val mainRepository: MainRepository): ViewModel(){
 
     private val currentUserId = mainRepository.getCurrentUser()!!.uid
 

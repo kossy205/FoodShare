@@ -1,15 +1,24 @@
 package com.kosiso.foodshare.ui.adapter
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Timestamp
 import com.kosiso.foodshare.databinding.ItemFoodRequestsBinding
 import com.kosiso.foodshare.models.FoodRequest
+import com.kosiso.foodshare.other.Utilities
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
+/**
+ *  this adapter is used by two fragments
+ *  1 -> The "Requests Fragment" in the guest activity
+ *  2 -> The "See Food Requests Fragment" in the donor activity
+ */
 class FoodRequestsAdapter: RecyclerView.Adapter<FoodRequestsAdapter.FoodRequestViewHolder>() {
 
     inner class FoodRequestViewHolder(val binding: ItemFoodRequestsBinding): RecyclerView.ViewHolder(binding.root)
@@ -32,8 +41,11 @@ class FoodRequestsAdapter: RecyclerView.Adapter<FoodRequestsAdapter.FoodRequestV
             itemFoodWeight.text = "${foodRequest.foodWeight}kg"
             itemFoodStatus.text = foodRequest.status
 
-            val dateFormat = SimpleDateFormat("dd.mm.yyyy", Locale.getDefault())
-            itemFoodPostDate.text = dateFormat.format(foodRequest.requestTime.toDate())
+//            val dateFormat = SimpleDateFormat("dd, MMM yyyy", Locale.getDefault())
+//            itemFoodPostDate.text = dateFormat.format(foodRequest.requestTime.toDate())
+//            itemFoodPostDate.text = formatDate(foodRequest.requestTime)
+
+            itemFoodPostDate.text = Utilities.formatTimeAgo(foodRequest.requestTime)
 
         }
     }

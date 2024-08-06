@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.View
 import android.webkit.MimeTypeMap
@@ -15,8 +16,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
 import com.kosiso.foodshare.R
 import pub.devrel.easypermissions.EasyPermissions
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 object Utilities {
 
@@ -81,23 +86,6 @@ object Utilities {
 
             false
         }
-
-
-//        val readExternalStoragePermissionGranted = ContextCompat.checkSelfPermission(
-//            context,
-//            Manifest.permission.READ_EXTERNAL_STORAGE
-//        ) == PackageManager.PERMISSION_GRANTED
-//        val readMediaImagesPermissionGranted = ContextCompat.checkSelfPermission(
-//            context,
-//            Manifest.permission.READ_MEDIA_IMAGES
-//        ) == PackageManager.PERMISSION_GRANTED
-//
-//
-//        return if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-//            (readExternalStoragePermissionGranted && readMediaImagesPermissionGranted )
-//        }else{
-//            (readExternalStoragePermissionGranted)
-//        }
     }
 
 
@@ -114,6 +102,38 @@ object Utilities {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    fun formatTimeAgo(timestamp: Timestamp): String {
+        val now = Date()
+        val createdAt = timestamp.toDate()
+
+        // Use DateUtils to format the duration
+        return DateUtils.getRelativeTimeSpanString(createdAt.time, now.time, DateUtils.MINUTE_IN_MILLIS).toString()
+    }
+
+    fun getDayOfMonthSuffix(n: Int): String {
+        if (n in 11..13) {
+            return "th"
+        }
+        return when (n % 10) {
+            1 -> "st"
+            2 -> "nd"
+            3 -> "rd"
+            else -> "th"
+        }
+    }
+
+    fun formatDate(timestamp: Timestamp): String {
+        val date = timestamp.toDate()
+
+        val dayOfMonth = SimpleDateFormat("d", Locale.getDefault()).format(date)
+        val month = SimpleDateFormat("MMM", Locale.getDefault()).format(date)
+        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
+
+        val suffix = getDayOfMonthSuffix(dayOfMonth.toInt())
+
+        return "${dayOfMonth}${suffix} of ${month}, ${year}"
     }
 
     fun showErrorSnackBar(message: String, view: View, context: Context) {

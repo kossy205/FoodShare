@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_availableFoodFragment2_to_makeRequestFragment"
             app:destination="@id/makeRequestFragment" />
+        <action
+            android:id="@+id/action_availableFoodFragment2_to_availableFoodDetailsFragment"
+            app:destination="@id/availableFoodDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/claimedFoodsFragment2"
@@ -38,4 +41,11 @@
         android:name="com.kosiso.foodshare.ui.fragments.guest.RequestsFragment"
         android:label="fragment_requests"
         tools:layout="@layout/fragment_requests" />
+
+    <fragment
+        android:id="@+id/availableFoodDetailsFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.AvailableFoodDetailsFragment"
+        android:label="AvailableFoodDetailsFragment"
+        tools:layout="@layout/fragment_available_food_details" />
+
 </navigation>

@@ -20,7 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.rpc.Help.Link
 import com.kosiso.foodshare.R
 import com.kosiso.foodshare.databinding.FragmentListingsBinding
-import com.kosiso.foodshare.models.FoodListing
+import FoodListing
 import com.kosiso.foodshare.other.Utilities
 import com.kosiso.foodshare.ui.adapter.ListingsAdapter
 import com.kosiso.foodshare.ui.viewmodels.donor.ListingsViewModel

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.QuerySnapshot
+import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -31,7 +32,7 @@ class AvailableFoodsViewModel @Inject constructor(private val mainRepository: Ma
 
 
     fun fetchAllFoodListings(){
-        mainRepository.fetchAllListings(currentUserId)
+        mainRepository.fetchAllAvailableListings()
             .addOnSuccessListener {querySnapshot->
                 if(querySnapshot.isEmpty){
                     _messageFromViewModel.value = "No Food Available around you"
@@ -42,7 +43,7 @@ class AvailableFoodsViewModel @Inject constructor(private val mainRepository: Ma
     }
 
     fun fetchPerishableFoodListings(){
-        mainRepository.fetchPerishableListings(currentUserId)
+        mainRepository.fetchPerishableListings()
             .addOnSuccessListener { querySnapshot->
                 if(querySnapshot.isEmpty){
                     _messageFromViewModel.value = "No Delivered Listings To Show"
@@ -53,7 +54,7 @@ class AvailableFoodsViewModel @Inject constructor(private val mainRepository: Ma
     }
 
     fun fetchNonPerishableFoodListings(){
-        mainRepository.fetchNonPerishableListings(currentUserId)
+        mainRepository.fetchNonPerishableListings()
             .addOnSuccessListener { querySnapshot->
                 if(querySnapshot.isEmpty){
                     _messageFromViewModel.value = "No Delivered Listings To Show"
@@ -65,7 +66,7 @@ class AvailableFoodsViewModel @Inject constructor(private val mainRepository: Ma
 
 
     fun fetchSearchedListings(searchedText: String){
-        mainRepository.fetchSearchedListings(currentUserId, searchedText)
+        mainRepository.fetchSearchedDocuments(Constants.LISTINGS, currentUserId, searchedText)
             .addOnSuccessListener {querySnapshot->
                 if(querySnapshot.isEmpty){
                     _messageFromViewModel.value = "No Food item matched your search: $searchedText"

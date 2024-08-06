@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
-import com.kosiso.foodshare.models.FoodListing
+import FoodListing
 import com.kosiso.foodshare.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID

@@ -1,4 +1,4 @@
-package com.kosiso.foodshare.ui.fragments.guest
+package com.kosiso.foodshare.ui.fragments.donor
 
 import android.os.Bundle
 import android.util.Log
@@ -11,43 +11,42 @@ import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kosiso.foodshare.databinding.FragmentRequestsBinding
+import com.kosiso.foodshare.R
+import com.kosiso.foodshare.databinding.FragmentSeeFoodRequestsBinding
 import com.kosiso.foodshare.models.FoodRequest
 import com.kosiso.foodshare.other.Utilities
 import com.kosiso.foodshare.ui.adapter.FoodRequestsAdapter
-import com.kosiso.foodshare.ui.viewmodels.guest.RequestsViewModel
+import com.kosiso.foodshare.ui.viewmodels.donor.SeeFoodRequestsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 /**
- *  this fragment uses the same adapter (FoodRequestsAdapter) as the "See Food Requests Fragment" in the donor activity
- */
+ *  this fragment uses the same adapter (FoodRequestsAdapter) as the "Requests Fragment" in the guest activity
+*/
+
 @AndroidEntryPoint
-class RequestsFragment : Fragment() {
+class SeeFoodRequestsFragment : Fragment(R.layout.fragment_see_food_requests) {
 
-
-    private lateinit var binding: FragmentRequestsBinding
-    private val requestsViewModel: RequestsViewModel by viewModels()
+    private lateinit var binding: FragmentSeeFoodRequestsBinding
+    private val seeFoodRequestsViewModel: SeeFoodRequestsViewModel by viewModels()
     private val adapter: FoodRequestsAdapter = FoodRequestsAdapter()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRequestsBinding.inflate(inflater, container, false)
+        binding = FragmentSeeFoodRequestsBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requestsViewModel.messageFromViewModel.observe(viewLifecycleOwner, Observer {
+
+        seeFoodRequestsViewModel.messageFromViewModel.observe(viewLifecycleOwner, Observer {
             Utilities.showErrorSnackBar(it, requireView(), requireContext())
         })
 
-        requestsViewModel.allFoodRequests.observe(viewLifecycleOwner, Observer{result->
+        seeFoodRequestsViewModel.allFoodRequests.observe(viewLifecycleOwner, Observer{ result->
             result.onSuccess {querySnapshot->
                 val foodRequestList = mutableListOf<FoodRequest>()
                 for (document in querySnapshot){
@@ -61,7 +60,7 @@ class RequestsFragment : Fragment() {
             }
         })
 
-        requestsViewModel.openFoodRequests.observe(viewLifecycleOwner, Observer{result->
+        seeFoodRequestsViewModel.openFoodRequests.observe(viewLifecycleOwner, Observer{ result->
             result.onSuccess {querySnapshot ->
 
             }
@@ -70,7 +69,7 @@ class RequestsFragment : Fragment() {
             }
         })
 
-        requestsViewModel.redeemedFoodRequests.observe(viewLifecycleOwner, Observer{result->
+        seeFoodRequestsViewModel.redeemedFoodRequests.observe(viewLifecycleOwner, Observer{ result->
             result.onSuccess {querySnapshot ->
 
             }
@@ -79,7 +78,7 @@ class RequestsFragment : Fragment() {
             }
         })
 
-        requestsViewModel.completedFoodRequests.observe(viewLifecycleOwner, Observer{result->
+        seeFoodRequestsViewModel.completedFoodRequests.observe(viewLifecycleOwner, Observer{ result->
             result.onSuccess {querySnapshot ->
 
             }
@@ -88,7 +87,7 @@ class RequestsFragment : Fragment() {
             }
         })
 
-        requestsViewModel.searchedRequests.observe(viewLifecycleOwner, Observer {result->
+        seeFoodRequestsViewModel.searchedRequests.observe(viewLifecycleOwner, Observer { result->
             result.onSuccess {querySnapshot->
                 val searchedFoods = mutableListOf<FoodRequest>()
                 for (document in querySnapshot){
@@ -107,7 +106,7 @@ class RequestsFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                requestsViewModel.fetchSearchedDocuments(newText!!)
+                seeFoodRequestsViewModel.fetchSearchedDocuments(newText!!)
                 return true
             }
         })
@@ -120,10 +119,10 @@ class RequestsFragment : Fragment() {
                 id: Long
             ) {
                 when(position){
-                    0 -> requestsViewModel.fetchAllFoodRequests()
-                    1 -> requestsViewModel.fetchOpenFoodRequests()
-                    2 -> requestsViewModel.fetchRedeemedFoodRequests()
-                    3 -> requestsViewModel.fetchCompletedFoodRequests()
+                    0 -> seeFoodRequestsViewModel.fetchAllFoodRequests()
+                    1 -> seeFoodRequestsViewModel.fetchOpenFoodRequests()
+                    2 -> seeFoodRequestsViewModel.fetchRedeemedFoodRequests()
+                    3 -> seeFoodRequestsViewModel.fetchCompletedFoodRequests()
                 }
             }
 
@@ -140,4 +139,5 @@ class RequestsFragment : Fragment() {
         binding.rvRequests.layoutManager = LinearLayoutManager(requireContext())
 
     }
+
 }

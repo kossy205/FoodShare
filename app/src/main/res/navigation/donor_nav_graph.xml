@@ -25,9 +25,9 @@
     </fragment>
     <fragment
         android:id="@+id/foodRequestsFragment"
-        android:name="com.kosiso.foodshare.ui.fragments.donor.FoodRequestsFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.SeeFoodRequestsFragment"
         android:label="fragment_food_requests"
-        tools:layout="@layout/fragment_food_requests" />
+        tools:layout="@layout/fragment_see_food_requests" />
     <fragment
         android:id="@+id/listingsFragment2"
         android:name="com.kosiso.foodshare.ui.fragments.donor.ListingsFragment"
