@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/donor_nav_graph"
+    app:startDestination="@id/impactDonorFragment">
+
+    <fragment
+        android:id="@+id/impactDonorFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.ImpactDonorFragment"
+        android:label="ImpactDonorFragment"
+        tools:layout="@layout/fragment_impact_donor">
+        <action
+            android:id="@+id/action_impactDonorFragment_to_listFoodFragment2"
+            app:destination="@id/listFoodFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFoodFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.ListFoodFragment"
+        android:label="fragment_list_food"
+        tools:layout="@layout/fragment_list_food" >
+        <action
+            android:id="@+id/action_listFoodFragment2_to_impactDonorFragment"
+            app:destination="@id/impactDonorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodRequestsFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.SeeFoodRequestsFragment"
+        android:label="fragment_food_requests"
+        tools:layout="@layout/fragment_see_food_requests" />
+    <fragment
+        android:id="@+id/listingsFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.ListingsFragment"
+        android:label="fragment_listings"
+        tools:layout="@layout/fragment_listings" />
+    <fragment
+        android:id="@+id/transitFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.TransitFragment"
+        android:label="fragment_transit"
+        tools:layout="@layout/fragment_transit" />
+</navigation>

@@ -7,5 +7,6 @@ data class User(
     val countryCode: Long = 0,
     val phone: Long = 0,
     val email: String = "",
-    val image: String = ""
+    val image: String = "",
+    val signUpAs: String = ""
 )

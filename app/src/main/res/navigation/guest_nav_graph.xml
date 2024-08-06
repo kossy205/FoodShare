@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/guest_nav_graph"
+    app:startDestination="@id/availableFoodFragment2">
+
+    <fragment
+        android:id="@+id/makeRequestFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.MakeRequestFragment"
+        android:label="MakeRequestFragment"
+        tools:layout="@layout/fragment_make_request" >
+        <action
+            android:id="@+id/action_makeRequestFragment_to_availableFoodFragment2"
+            app:destination="@id/availableFoodFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/availableFoodFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.AvailableFoodFragment"
+        android:label="fragment_available_food"
+        tools:layout="@layout/fragment_available_food" >
+        <action
+            android:id="@+id/action_availableFoodFragment2_to_makeRequestFragment"
+            app:destination="@id/makeRequestFragment" />
+        <action
+            android:id="@+id/action_availableFoodFragment2_to_availableFoodDetailsFragment"
+            app:destination="@id/availableFoodDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/claimedFoodsFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.ClaimedFoodsFragment"
+        android:label="fragment_claimed_foods"
+        tools:layout="@layout/fragment_claimed_foods" />
+    <fragment
+        android:id="@+id/guestTransitFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.GuestTransitFragment"
+        android:label="fragment_guest_transit"
+        tools:layout="@layout/fragment_guest_transit" />
+    <fragment
+        android:id="@+id/requestsFragment2"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.RequestsFragment"
+        android:label="fragment_requests"
+        tools:layout="@layout/fragment_requests" />
+
+    <fragment
+        android:id="@+id/availableFoodDetailsFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.guest.AvailableFoodDetailsFragment"
+        android:label="AvailableFoodDetailsFragment"
+        tools:layout="@layout/fragment_available_food_details" />
+
+</navigation>

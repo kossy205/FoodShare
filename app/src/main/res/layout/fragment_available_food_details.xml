@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="15dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white">
+
+
+
+            <ImageView
+                android:id="@+id/food_image"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/potato"
+                app:layout_constraintBottom_toTopOf="@+id/cl_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="@dimen/layout_marginSide"
+                app:layout_constraintTop_toBottomOf="@+id/food_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cl_1">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="40dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/item_food_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_profile"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="@dimen/layout_marginSide"
+                app:layout_constraintStart_toEndOf="@id/cl_2"
+                app:layout_constraintTop_toTopOf="@+id/cl_2"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_2">
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kossy is giving away:"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_food_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Potatoes"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading_2_text_size"
+                    android:textStyle="bold"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/iv_time"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_time"
+                    android:tint="@color/gray"
+                    app:layout_constraintTop_toTopOf="@id/item_food_post_date"
+                    app:layout_constraintBottom_toBottomOf="@id/item_food_post_date"
+                    app:layout_constraintEnd_toStartOf="@id/item_food_post_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/item_food_post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 minutes ago"
+                    android:textColor="@color/gray"
+                    android:layout_marginStart="5dp"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintStart_toEndOf="@id/iv_time"
+                    app:layout_constraintTop_toBottomOf="@+id/item_food_name" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="2dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray"
+                    app:layout_constraintStart_toEndOf="@id/item_food_post_date"
+                    app:layout_constraintTop_toBottomOf="@+id/item_food_name"
+                    app:layout_constraintTop_toTopOf="@id/item_food_post_date"
+                    app:layout_constraintBottom_toBottomOf="@id/item_food_post_date" />
+
+                <TextView
+                    android:id="@+id/item_food_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perishable"
+                    android:textColor="@color/red"
+                    android:layout_marginStart="8dp"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintStart_toEndOf="@id/view"
+                    app:layout_constraintTop_toTopOf="@id/item_food_post_date"
+                    app:layout_constraintBottom_toBottomOf="@id/item_food_post_date" />
+
+                <ImageView
+                    android:id="@+id/iv_weight"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_weight"
+                    android:tint="@color/gray"
+                    app:layout_constraintTop_toTopOf="@id/item_food_weight"
+                    app:layout_constraintBottom_toBottomOf="@id/item_food_weight"
+                    app:layout_constraintEnd_toStartOf="@id/item_food_weight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/item_food_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40kg"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintStart_toEndOf="@id/iv_weight"
+                    app:layout_constraintTop_toBottomOf="@+id/item_food_post_date" />
+
+                <View
+                    android:id="@+id/view_1"
+                    android:layout_width="2dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray"
+                    app:layout_constraintStart_toEndOf="@id/item_food_weight"
+                    app:layout_constraintTop_toTopOf="@id/item_food_weight"
+                    app:layout_constraintBottom_toBottomOf="@id/item_food_weight" />
+
+                <TextView
+                    android:id="@+id/item_food_exp_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exp: 23 | 03 | 2024"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintTop_toTopOf="@id/item_food_weight"
+                    app:layout_constraintBottom_toBottomOf="@id/item_food_weight"
+                    app:layout_constraintStart_toEndOf="@id/view_1"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/item_food_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="start"
+                android:text="Had a really great harvest and my bard is full. The surplus are just there with no one to consume them, I'm open to giving it out."
+                android:textSize="@dimen/normal_text_size"
+                android:layout_marginStart="@dimen/layout_marginSide"
+                android:layout_marginEnd="@dimen/layout_marginSide"
+                app:layout_constraintTop_toBottomOf="@id/cl_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_pickup_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PickUp Time"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading_3_text_size"
+                android:textStyle="bold"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:layout_marginStart="@dimen/layout_marginSide"
+                android:layout_marginEnd="@dimen/layout_marginSide"
+                app:layout_constraintTop_toBottomOf="@+id/item_food_desc"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/item_location_time_diff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 minutes drive"
+                android:textColor="@color/gray"
+                android:layout_marginStart="@dimen/layout_marginSide"
+                android:layout_marginEnd="@dimen/layout_marginSide"
+                android:textSize="@dimen/normal_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pickup_time" />
+
+
+            <Button
+                android:id="@+id/btnClaim"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="45dp"
+                android:text="Claim"
+                android:textSize="@dimen/normal_text_size"
+                android:background="@drawable/btn_background"
+                android:textColor="@color/white"
+                android:layout_marginStart="@dimen/layout_marginSide"
+                android:layout_marginEnd="@dimen/layout_marginSide"
+                android:layout_marginBottom="@dimen/layout_marginSide"
+                app:layout_constraintTop_toBottomOf="@+id/item_location_time_diff"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:text="Cancel"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/normal_text_size"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnClaim" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>

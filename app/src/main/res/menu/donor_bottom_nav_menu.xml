@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/listFoodFragment"
+        android:title="@string/list_food"
+        android:icon="@drawable/ic_list_food"/>
+
+    <item
+        android:id="@+id/foodRequestFragment"
+        android:title="@string/food_requests"
+        android:icon="@drawable/ic_request"/>
+
+    <item
+        android:id="@+id/listingsFragment"
+        android:title="@string/listings"
+        android:icon="@drawable/ic_listing"/>
+
+    <item
+        android:id="@+id/transitFragment"
+        android:title="@string/transit"
+        android:icon="@drawable/ic_transit"/>
+</menu>

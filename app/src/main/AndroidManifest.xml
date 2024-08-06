@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -11,25 +19,44 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.FoodShare"
         tools:targetApi="31">
+
         <activity
-            android:name=".ui.activities.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".ui.activities.VolunteerActivity"
             android:exported="false"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/AppTheme.Fullscreen" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.FoodShare" />
+        <activity
+            android:name=".ui.activities.GuestActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.FoodShare" />
+        <activity
+            android:name=".ui.activities.DonorActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.FoodShare" />
+
         <activity
             android:name=".ui.activities.MainActivity"
             android:exported="true"
-            android:launchMode="singleTask"
             android:theme="@style/Theme.FoodShare">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activities.AuthenticationActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.FoodShare"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="com.google.android.gms.version"

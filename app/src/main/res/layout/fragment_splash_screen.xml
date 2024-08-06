@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
+    android:background="@color/main_green"
     android:theme="@style/ThemeOverlay.FoodShare.FullscreenContainer"
     tools:context=".ui.fragments.SplashScreenFragment"
     >

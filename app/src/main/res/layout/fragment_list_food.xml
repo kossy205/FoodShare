@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/listFood"
+    android:layout_marginStart="@dimen/layout_marginSide"
+    android:layout_marginEnd="@dimen/layout_marginSide"
+    android:background="@color/white">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Excess Food"
+            android:textStyle="bold"
+            android:textSize="@dimen/heading_3_text_size"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/food_image1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFoodName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            app:endIconMode="custom"
+            app:endIconTint="#FEFEFE"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/food_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFoodName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_et"
+                android:ems="10"
+                android:hint="name of item"
+                android:imeActionId="1"
+                android:imeOptions="actionSend"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/normal_text_size"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFoodDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            android:textColorHint="@color/black"
+            app:endIconMode="custom"
+            app:endIconTint="#FEFEFE"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/tilFoodName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFoodDescription"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="top"
+                android:background="@drawable/background_et"
+                android:ems="10"
+                android:hint="item description"
+                android:imeActionId="1"
+                android:imeOptions="actionSend"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/normal_text_size"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFoodType"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            android:textColorHint="@color/black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilFoodDescription"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/tvFoodType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_et"
+                android:ems="10"
+                android:hint="item type?"
+                android:imeActionId="1"
+                android:imeOptions="actionSend"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/normal_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_perishable_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expiry Date"
+            android:textSize="@dimen/normal_text_size"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/tilFoodType"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPerishableDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            app:endIconMode="custom"
+            app:endIconTint="#FEFEFE"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/tv_perishable_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPerishableDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_et"
+                android:ems="10"
+                android:hint="item expiry date"
+                android:imeActionId="1"
+                android:imeOptions="actionSend"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/normal_text_size"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFoodWeight"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            app:endIconMode="custom"
+            app:endIconTint="#FEFEFE"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/tilPerishableDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFoodWeight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_et"
+                android:ems="10"
+                android:hint="food weight in kg"
+                android:imeActionId="1"
+                android:imeOptions="actionSend"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/normal_text_size"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnListFood"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="Proceed"
+            android:textSize="@dimen/normal_text_size"
+            android:visibility="visible"
+            android:background="@drawable/btn_background"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tilFoodWeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_loading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/main_green"
+            android:visibility="gone"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tilFoodWeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please wait"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/progress_bar"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_loading"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+
+
+
+
+
+
+
