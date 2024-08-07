@@ -8,6 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.kosiso.foodshare.R
 import com.kosiso.foodshare.databinding.FragmentAvailableFoodBinding
 import com.kosiso.foodshare.databinding.FragmentAvailableFoodDetailsBinding
 import com.kosiso.foodshare.other.Constants
@@ -18,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AvailableFoodDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentAvailableFoodDetailsBinding
+    private var map: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,5 +58,48 @@ class AvailableFoodDetailsFragment : Fragment() {
         binding.tvCancel.setOnClickListener {
             Utilities.showErrorSnackBar("Canceled ${item?.nameOfItem}", requireView(), requireContext())
         }
+        binding.mapView.onCreate(savedInstanceState)
+        binding.mapView.getMapAsync {
+            map = it
+
+            val latitude = item!!.foodListingLocation!!.latitude
+            val longitude = item!!.foodListingLocation!!.longitude
+            val markerPosition = LatLng(latitude, longitude)
+            map?.apply {
+                addMarker(MarkerOptions()
+                    .position(markerPosition)
+                    .title("Food Location")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_60)))
+                moveCamera(CameraUpdateFactory.newLatLng(markerPosition))
+                animateCamera(CameraUpdateFactory.zoomTo(15f)) // Adjust zoom level as needed
+            }
+
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.mapView.onStop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView.onPause()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.mapView.onLowMemory()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        binding.mapView.onSaveInstanceState(outState)
     }
 }
