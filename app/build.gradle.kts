@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
 //    alias(libs.plugins.androidApplication)
 //    alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -38,7 +41,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val props = Properties()
+        props.load(FileInputStream("local.properties"))
+        buildConfigField ("String", "API_KEY", "\"${props.getProperty("API_KEY")}\"")
+
+
+        //buildConfigField ("String", "API_KEY", "\"${System.getProperty("API_KEY")}\"")
+
+
     }
+
+
 
     buildTypes {
         release {
@@ -58,6 +72,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
