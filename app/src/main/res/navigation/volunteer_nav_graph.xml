@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/volunteer_nav_graph.xml"
+    app:startDestination="@id/updatesFragment">
+
+    <fragment
+        android:id="@+id/volunteerImpactFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.volunteer.VolunteerImpactFragment"
+        android:label="VolunteerImpactFragment"
+        tools:layout="@layout/fragment_volunteer_impact" />
+    <fragment
+        android:id="@+id/updatesFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.volunteer.UpdatesFragment"
+        android:label="UpdatesFragment"
+        tools:layout="@layout/fragment_updates"/>
+    <fragment
+        android:id="@+id/volunteerHistoryFragment"
+        android:name="com.kosiso.foodshare.ui.fragments.donor.TransitFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_volunteer_history" />
+</navigation>

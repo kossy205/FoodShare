@@ -69,6 +69,6 @@ class GuestActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.donorNavHostFragment).navigateUp() || super.onSupportNavigateUp()
+        return findNavController(R.id.guestNavHostFragment).navigateUp() || super.onSupportNavigateUp()
     }
 }

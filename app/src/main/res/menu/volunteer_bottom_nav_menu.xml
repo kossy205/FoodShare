@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/updatesVolunteerFragment"
+        android:title="@string/Updates"
+        android:icon="@drawable/ic_listing"/>
+
+    <item
+        android:id="@+id/impactVolunteerFragment"
+        android:title="@string/Impact"
+        android:icon="@drawable/ic_request"/>
+
+    <item
+        android:id="@+id/historyVolunteerFragment"
+        android:title="@string/history"
+        android:icon="@drawable/ic_request"/>
+
+</menu>
