@@ -7,10 +7,13 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.UploadTask
+import com.kosiso.foodshare.models.DeliveryRequest
 import com.kosiso.foodshare.models.FoodRequest
 import com.kosiso.foodshare.models.User
+import org.imperiumlabs.geofirestore.GeoQuery
 
 interface MainRepository {
 
@@ -44,9 +47,10 @@ interface MainRepository {
 
 
     /**
-     * Perform Search
+     *  Perform Search
      */
     fun fetchSearchedDocuments(collection: String, uid: String, searchedText: String): Task<QuerySnapshot>
+
 
     /**
      * Food Request
@@ -56,5 +60,26 @@ interface MainRepository {
     fun fetchOpenFoodRequests(uid: String): Task<QuerySnapshot>
     fun fetchRedeemedFoodRequests(uid: String): Task<QuerySnapshot>
     fun fetchCompletedFoodRequests(uid: String): Task<QuerySnapshot>
+
+
+    /**
+     * Delivery Request
+     */
+    fun uploadDeliveryRequest(userId: String, deliveryRequest: DeliveryRequest): Task<Void>
+    fun queryNearByDeliveryAgents(geoPoint: GeoPoint, radius: Double): GeoQuery
+
+
+    /**
+     * Set location using geofirestore
+     */
+    fun setLocationUsingGeoFirestore(userId: String, collection: String, location: GeoPoint)
+
+
+
+    /**
+     *  Delete collection
+     */
+    fun deleteDocFromCollection(collection: String, documentId: String): Task<Void>
+
 
 }

@@ -33,7 +33,7 @@
     </string-array>
 
 
-    <string name="google_maps_key">${BuildConfig.API_KEY}</string>
+    <string name="google_maps_key">AIzaSyBaathLxIFAJL2bG3beYot9SrPBl8ogrTM</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

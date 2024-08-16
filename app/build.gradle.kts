@@ -106,6 +106,9 @@ dependencies {
     // Firebase Storage Dependency
     implementation ("com.google.firebase:firebase-storage")
 
+    //Geofirestore
+    implementation ("com.github.imperiumlabs:GeoFirestore-Android:v1.5.0")
+
 
     // material
     implementation ("com.google.android.material:material:1.12.0-alpha03")

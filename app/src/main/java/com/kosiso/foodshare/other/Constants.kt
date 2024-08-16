@@ -17,6 +17,8 @@ object Constants {
     const val REDEEMED_FOOD_REQUESTS: String = "Redeemed"
     const val COMPLETED_FOOD_REQUESTS: String = "Completed"
     const val ITEM_AVAILABLE_FOOD_DATA_OBJECT: String = ""
+    const val DELIVERY_REQUESTS: String = "delivery-requests"
+    const val AVAILABLE_VOLUNTEERS: String = "available-volunteers"
     const val ITEM_DESCRIPTION: String = "itemDescription"
     const val USER_DETAILS: String = "user_details"
     const val REQUEST_CODE_LOCATION_PERMISSION = 1
