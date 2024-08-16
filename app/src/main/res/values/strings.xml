@@ -33,7 +33,7 @@
     </string-array>
 
 
-    <string name="google_maps_key">AIzaSyBaathLxIFAJL2bG3beYot9SrPBl8ogrTM</string>
+    <string name="google_maps_key"></string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -53,4 +53,7 @@
     <string name="available_foods">Available</string>
     <string name="requests">Requests</string>
     <string name="claimed_foods">Claimed Foods</string>
+    <string name="Updates">Updates</string>
+    <string name="history">History</string>
+    <string name="Impact">Impact</string>
 </resources>
