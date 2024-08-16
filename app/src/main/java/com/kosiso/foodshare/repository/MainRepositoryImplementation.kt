@@ -3,26 +3,38 @@ package com.kosiso.foodshare.repository
 import FoodListing
 import android.app.Activity
 import android.net.Uri
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import com.kosiso.foodshare.di.AppModule
+import com.kosiso.foodshare.models.DeliveryRequest
 import com.kosiso.foodshare.models.FoodRequest
 import com.kosiso.foodshare.models.User
 import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.other.Utilities
+import org.imperiumlabs.geofirestore.GeoFirestore
+import org.imperiumlabs.geofirestore.GeoQuery
+import org.imperiumlabs.geofirestore.extension.setLocation
+import org.imperiumlabs.geofirestore.listeners.GeoQueryEventListener
 import javax.inject.Inject
 
 class MainRepositoryImplementation @Inject constructor(
-    val firebaseAuth: FirebaseAuth, val firestore:FirebaseFirestore): MainRepository{
+    val firebaseAuth: FirebaseAuth,
+    val firestore:FirebaseFirestore,
+    val geoFirestoreProvider: (String) -> GeoFirestore
+): MainRepository{
 
+    private var geoQuery: GeoQuery? = null
 
     override fun signIn(email: String, password: String): Task<AuthResult> {
         return firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -153,6 +165,39 @@ class MainRepositoryImplementation @Inject constructor(
             .startAt(searchedText)
             .endAt(searchedText + "\uf8ff")
             .get()
+    }
+
+
+    /**
+     * Delivery Request
+     */
+    override fun uploadDeliveryRequest(userId: String, deliveryRequest: DeliveryRequest): Task<Void> {
+        return firestore.collection(Constants.DELIVERY_REQUESTS)
+            .document(userId)
+            .set(deliveryRequest, SetOptions.merge())
+    }
+
+    override fun setLocationUsingGeoFirestore(userId: String, collection: String, location: GeoPoint) {
+        val geoFirestore = geoFirestoreProvider(collection)
+        geoFirestore.setLocation(userId, location)
+    }
+
+    override fun queryNearByDeliveryAgents(geoPoint: GeoPoint, radius: Double): GeoQuery {
+        val geoFirestore = geoFirestoreProvider(Constants.AVAILABLE_VOLUNTEERS)
+
+        return geoFirestore.queryAtLocation(geoPoint, radius)
+
+    }
+
+
+
+    /**
+     *  Delete collection
+     */
+    override fun deleteDocFromCollection(collection: String, documentId: String): Task<Void> {
+        return firestore.collection(collection)
+            .document(documentId)
+            .delete()
     }
 
 

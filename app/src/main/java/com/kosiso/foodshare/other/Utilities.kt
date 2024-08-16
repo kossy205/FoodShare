@@ -3,14 +3,17 @@ package com.kosiso.foodshare.other
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.text.format.DateUtils
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.webkit.MimeTypeMap
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -18,6 +21,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.kosiso.foodshare.R
+import com.kosiso.foodshare.databinding.CustomLoadingDialogBinding
 import pub.devrel.easypermissions.EasyPermissions
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -25,7 +29,7 @@ import java.util.Locale
 
 object Utilities {
 
-
+    private var customDialog: Dialog? = null
 
     fun hasLocationPermissions(context: Context): Boolean {
 
@@ -102,6 +106,25 @@ object Utilities {
                 dialog.dismiss()
             }
             .show()
+    }
+
+
+    fun showCustomDialog(context: Context, message: String): Dialog{
+
+        customDialog?.dismiss()
+        customDialog = Dialog(context).apply {
+            setContentView(R.layout.custom_loading_dialog)
+            setCanceledOnTouchOutside(false)
+            val tvCustomDialog: TextView = findViewById(R.id.tv_custom_dialog)
+            tvCustomDialog.text = message
+            show()
+        }
+        return customDialog as Dialog
+    }
+
+    fun dismissCustomDialog() {
+        customDialog?.dismiss()
+        customDialog = null
     }
 
     fun formatTimeAgo(timestamp: Timestamp): String {

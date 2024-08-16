@@ -46,6 +46,10 @@
         android:id="@+id/availableFoodDetailsFragment"
         android:name="com.kosiso.foodshare.ui.fragments.guest.AvailableFoodDetailsFragment"
         android:label="AvailableFoodDetailsFragment"
-        tools:layout="@layout/fragment_available_food_details" />
+        tools:layout="@layout/fragment_available_food_details" >
+        <action
+            android:id="@+id/action_availableFoodDetailsFragment_to_availableFoodFragment2"
+            app:destination="@id/availableFoodFragment2" />
+    </fragment>
 
 </navigation>
