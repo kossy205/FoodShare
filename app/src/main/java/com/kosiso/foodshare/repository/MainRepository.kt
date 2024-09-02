@@ -73,9 +73,11 @@ interface MainRepository {
     /**
      * Connecting quest and delivery agent
      */
-    fun assignCusToAvailableDeliveryAgent(documentId:String): Task<Void>
+    fun assignCusToAvailableDeliveryAgent(deliveryAgentId: String): Task<Void>
     fun volunteerCollectionAssignedCusIdListener(): LiveData<DocumentSnapshot>
     fun fetchDeliveryRequestDetails(cusId: String): Task<DocumentSnapshot>
+    fun changeVolunteerAcceptStatus(acceptStatus: String): Task<Void>
+    fun deliveryAcceptStatusListener(deliveryAgentId: String): LiveData<String>
 
 
 

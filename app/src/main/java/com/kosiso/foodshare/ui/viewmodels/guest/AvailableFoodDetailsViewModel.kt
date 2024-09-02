@@ -5,9 +5,11 @@ import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
+import com.kosiso.foodshare.ForeGroundService
 import com.kosiso.foodshare.models.DeliveryRequest
 import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.repository.MainRepository
@@ -21,8 +23,10 @@ import javax.inject.Inject
 class AvailableFoodDetailsViewModel @Inject constructor(val mainRepository: MainRepository): ViewModel(){
 
     var hasFoundMatch = false
+    var volunteerId: String? = null
     private lateinit var geoQueryEventListener: GeoQueryEventListener
     private lateinit var geoQuery: GeoQuery
+    private lateinit var deliveryAcceptStatusObserver: Observer<String>
 
     private val _uploadDeliveryRequest = MutableLiveData<Result<String>>()
     val uploadDeliveryRequest: LiveData<Result<String>> = _uploadDeliveryRequest
@@ -86,7 +90,6 @@ class AvailableFoodDetailsViewModel @Inject constructor(val mainRepository: Main
     }
 
     private fun queryAvailableVolunteers(geoPoint: GeoPoint){
-        var volunteerId = ""
         val radius = 3.0
         geoQuery = mainRepository.queryNearByDeliveryAgents(geoPoint, radius)
 
@@ -125,8 +128,9 @@ class AvailableFoodDetailsViewModel @Inject constructor(val mainRepository: Main
                         hasFoundMatch = true
 
                         volunteerId = documentID
-                        fetchVolunteerDetails(volunteerId)
-                        assignCusToAvailableDeliveryAgent(volunteerId)
+                        fetchVolunteerDetails(volunteerId!!)
+                        assignCusToAvailableDeliveryAgent(volunteerId!!)
+                        deliveryAcceptStatusListener(volunteerId!!)
                         Log.i("geoquery qualified", "$volunteerId is in the radius.")
                         removeGeoQueryEventListeners()
                     }
@@ -170,10 +174,37 @@ class AvailableFoodDetailsViewModel @Inject constructor(val mainRepository: Main
             }
     }
 
-    //demo
-//    fun setVolunteerLocation(location: GeoPoint){
-//        mainRepository.setLocationUsingGeoFirestore("v1zoqixll3hPdqO1pNUOW8aDK3x2", Constants.AVAILABLE_VOLUNTEERS, location)
-//    }
+    private fun deliveryAcceptStatusListener(deliveryAgentId: String){
+        deliveryAcceptStatusObserver = Observer { acceptStatus ->
+            when (acceptStatus) {
+                Constants.TRUE -> {
+
+                    Log.i("delivery accept status is ->", acceptStatus)
+                }
+
+                Constants.FALSE -> {
+                    Log.i("delivery accept status is ->", acceptStatus)
+                }
+            }
+
+        }
+        mainRepository.deliveryAcceptStatusListener(deliveryAgentId)
+            .observeForever(deliveryAcceptStatusObserver)
+    }
+
+    // the volunteer Id here is still the delivery agent id gotten.
+    // that should not confuse you
+    override fun onCleared() {
+        super.onCleared()
+        volunteerId?.let {volunteerId->
+            deliveryAcceptStatusObserver.let {observer ->
+                mainRepository.deliveryAcceptStatusListener(volunteerId)
+                    .removeObserver(observer)
+                Log.i("delivery Accept Status Observer"," removed")
+            }
+        }
+
+    }
 
 
 }
