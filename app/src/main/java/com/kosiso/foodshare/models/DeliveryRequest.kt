@@ -8,7 +8,7 @@ data class DeliveryRequest(
     val uid:String = "",
     val nameOfItem:String = "",
     val itemDescription:String = "",
-    val foodImg: String,
+    val foodImg: String = "",
     val listingCategory:String = "", // we have perishable and non-perishable
     val foodWeight:Int = 0,
     val status:String = "", // we have Unclaimed, Claimed and Delivered

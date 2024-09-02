@@ -126,6 +126,7 @@ class AvailableFoodDetailsViewModel @Inject constructor(val mainRepository: Main
 
                         volunteerId = documentID
                         fetchVolunteerDetails(volunteerId)
+                        assignCusToAvailableDeliveryAgent(volunteerId)
                         Log.i("geoquery qualified", "$volunteerId is in the radius.")
                         removeGeoQueryEventListeners()
                     }
@@ -156,6 +157,16 @@ class AvailableFoodDetailsViewModel @Inject constructor(val mainRepository: Main
             }
             .addOnFailureListener {
 
+            }
+    }
+
+    private fun assignCusToAvailableDeliveryAgent(deliveryAgentId: String){
+        mainRepository.assignCusToAvailableDeliveryAgent(deliveryAgentId)
+            .addOnSuccessListener {
+                Log.i("assign Cus To Available Delivery Agent", "success")
+            }
+            .addOnFailureListener {
+                Log.i("assign Cus To Available Delivery Agent", "failed")
             }
     }
 

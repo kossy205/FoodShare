@@ -68,7 +68,6 @@ object AppModule {
                                   locationRequest: LocationRequest): LocationRepository {
         return LocationRepositoryImplementation(fusedLocationProviderClient, locationRequest)
     }
-
     @Singleton
     @Provides
     fun provideFusedLocationClient(@ApplicationContext app: Context):FusedLocationProviderClient{

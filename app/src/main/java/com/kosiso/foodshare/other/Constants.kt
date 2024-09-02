@@ -19,6 +19,22 @@ object Constants {
     const val ITEM_AVAILABLE_FOOD_DATA_OBJECT: String = ""
     const val DELIVERY_REQUESTS: String = "delivery-requests"
     const val AVAILABLE_VOLUNTEERS: String = "available-volunteers"
+
+    const val NOTIFICATION_CHANNEL_ID = "volunteer_available_channel"
+    const val NOTIFICATION_CHANNEL_NAME = "available_volunteer"
+    const val NOTIFICATION_ID = 1
+    const val ACTION_START = "start_service"
+    const val ACTION_STOP = " stop_service"
+    const val ACTION_SHOW_VOLUNTEER_UPDATE_FRAGMENT = "ACTION_SHOW_VOLUNTEER_UPDATE_FRAGMENT"
+
+    const val TRUE = "true"
+    const val FALSE = "false"
+
+    const val ASSIGNED_CUSTOMER_ID = "assignedCusId"
+    const val HAS_ACCEPTED = "hasAccepted"
+    const val IS_ENROUTE = "isEnroute"
+
+
     const val ITEM_DESCRIPTION: String = "itemDescription"
     const val USER_DETAILS: String = "user_details"
     const val REQUEST_CODE_LOCATION_PERMISSION = 1
