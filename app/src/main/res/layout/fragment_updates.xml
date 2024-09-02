@@ -17,13 +17,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnToggleRun"
+        android:id="@+id/btn_online"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_play"
         app:maxImageSize="35dp"
         app:backgroundTint="@color/main_green"
-        app:fabCustomSize="70dp"
+        app:fabCustomSize="60dp"
         app:rippleColor="@android:color/white"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="95dp"
@@ -33,24 +33,26 @@
         app:tint="@android:color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnFinishRun"
+        android:id="@+id/btn_offline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_stop"
         app:maxImageSize="35dp"
         app:backgroundTint="@color/red"
-        app:fabCustomSize="70dp"
+        app:fabCustomSize="60dp"
+        android:visibility="gone"
         app:rippleColor="@android:color/white"
         android:layout_marginEnd="52dp"
-        android:layout_marginBottom="5dp"
-        android:visibility="gone"
+        android:layout_marginBottom="95dp"
         app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.FloatingActionButton"
-        app:layout_constraintBottom_toTopOf="@+id/btnToggleRun"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clMain"
+        android:id="@+id/cl_enroute_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,17 +61,70 @@
         android:layout_marginBottom="35dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/rounded_corner">
+        android:background="@drawable/rounded_corner"
+        android:elevation="2dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnFinishDelivery"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_stop"
+            app:maxImageSize="35dp"
+            app:backgroundTint="@color/red"
+            app:fabCustomSize="60dp"
+            app:rippleColor="@android:color/white"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="visible"
+            app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.FloatingActionButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clCalories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/cl_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="25dp"
-            android:background="@color/blue">
+            android:layout_margin="15dp"
+            android:background="@color/main_green">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/item_food_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_profile"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_receiver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cl_iv"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/main_green">
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -77,8 +132,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:text="Calories Burnt"
-                android:textColor="@color/gray"
+                android:text="Receiver"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/tvCaloriesValue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -88,8 +143,8 @@
                 android:id="@+id/tvCaloriesValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="0"
+                android:textSize="@dimen/normal_text_size"
+                android:text="Kosi"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/tvCalories"
@@ -97,18 +152,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvCaloriesUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:text="kcals"
-                android:textColor="@color/gray"
-                android:layout_marginStart="3dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCaloriesValue"
-                app:layout_constraintTop_toTopOf="@+id/tvCaloriesValue"
-                app:layout_constraintStart_toEndOf="@+id/tvCaloriesValue"
-                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -116,37 +159,36 @@
             android:id="@+id/clDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:background="@color/blue"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/clCalories"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/main_green"
+            app:layout_constraintTop_toBottomOf="@+id/cl_receiver_name"
+            app:layout_constraintStart_toEndOf="@+id/cl_iv"
             app:layout_constraintBottom_toBottomOf="parent">
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:text="Duration"
-                android:textColor="@color/gray"
-                app:layout_constraintBottom_toTopOf="@+id/tvTimer"
+            <ImageView
+                android:id="@+id/iv_dropOff_location"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_location_green"
+                android:tint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="00:00:00:00"
+                android:textSize="@dimen/normal_text_size"
+                android:text="7 min"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/tvDuration"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="5dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_dropOff_location"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/iv_dropOff_location"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_dropOff_location"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,8 @@
         <item name="materialButtonStyle">@style/MyButtonStyle</item>
         <!-- Ensure appropriate theme for BottomNavigationView -->
         <item name="bottomNavigationStyle">@style/BottomNavigationTheme</item>
+
+
     </style>
 
     <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">

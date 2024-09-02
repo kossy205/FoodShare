@@ -39,7 +39,7 @@ class SignUpViewModel @Inject constructor(val mainRepository: MainRepository): V
                         countryCode!!,
                         phone!!,
                         email,
-                        password,
+                        "image",
                         signUpAs
                     )
                     mainRepository.registerUserInDb(user)

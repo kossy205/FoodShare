@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="30dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="2dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/item_food_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/potato"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/guestName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/cvImage"
+            android:layout_toRightOf="@id/cvImage"
+            android:text="Kossy needs"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_item_weight"
+            android:layout_below="@id/guestName"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@id/cvImage"
+            android:layout_toRightOf="@id/cvImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/food_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Jollof Rice"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_text_size"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="2dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/gray"
+                app:layout_constraintStart_toEndOf="@id/food_item_name"
+                app:layout_constraintTop_toTopOf="@id/food_item_name"
+                app:layout_constraintBottom_toBottomOf="@id/food_item_name" />
+
+
+            <ImageView
+                android:id="@+id/iv_weight"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_weight"
+                app:tint="@color/black"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@id/food_item_name"
+                app:layout_constraintBottom_toBottomOf="@id/food_item_name"
+                app:layout_constraintEnd_toStartOf="@id/item_food_weight"
+                app:layout_constraintStart_toEndOf="@+id/view_1" />
+
+            <TextView
+                android:id="@+id/item_food_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40kg"
+                android:textColor="@color/black"
+                android:layout_marginStart="5dp"
+                android:textSize="@dimen/normal_text_size"
+                app:layout_constraintTop_toTopOf="@id/food_item_name"
+                app:layout_constraintBottom_toBottomOf="@id/food_item_name"
+                app:layout_constraintStart_toEndOf="@id/iv_weight" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <!--text view for displaying course duration-->
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cl_item_weight"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/cvImage"
+            android:layout_toRightOf="@id/cvImage"
+            android:text="Had a really great harvest and my bard is full. The surplus are just there with no one to consume them, I'm open to giving it out."
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_item_address"
+            android:layout_marginTop="15dp"
+            android:layout_margin="20dp"
+            android:layout_below="@+id/item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_icon_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_pickUp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_circle"
+                    android:tint="@color/main_green"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="18dp"
+                    android:background="@color/gray"
+                    android:layout_margin="3dp"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_pickUp"
+                    app:layout_constraintBottom_toTopOf="@+id/iv_dropOff"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_dropOff"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_location_outline"
+                    android:tint="@color/main_green"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                app:layout_constraintStart_toEndOf="@+id/cl_icon_address"
+                app:layout_constraintTop_toTopOf="@+id/cl_icon_address"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_icon_address">
+
+                <TextView
+                    android:id="@+id/tv_pickUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobil Junction idumota road by Idele sawmill"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_dropOff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4th avenue gabbas Junction by sapele round"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_text_size"
+                    android:layout_marginTop="25dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pickUp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--button for accepting delivery and dismissing our dialog-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cl_item_address"
+            android:layout_marginBottom="5dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/idBtnAccept"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Accept"
+                android:textSize="@dimen/normal_text_size"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/idBtnDismiss"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/idBtnDismiss"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Cancel"
+                android:textSize="@dimen/normal_text_size"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@+id/idBtnAccept"
+                app:layout_constraintBottom_toBottomOf="@id/idBtnAccept"
+                app:layout_constraintEnd_toStartOf="@+id/idBtnAccept"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

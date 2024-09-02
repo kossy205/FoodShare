@@ -3,6 +3,7 @@ package com.kosiso.foodshare.repository
 import FoodListing
 import android.app.Activity
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
@@ -67,6 +68,15 @@ interface MainRepository {
      */
     fun uploadDeliveryRequest(userId: String, deliveryRequest: DeliveryRequest): Task<Void>
     fun queryNearByDeliveryAgents(geoPoint: GeoPoint, radius: Double): GeoQuery
+
+
+    /**
+     * Connecting quest and delivery agent
+     */
+    fun assignCusToAvailableDeliveryAgent(documentId:String): Task<Void>
+    fun volunteerCollectionAssignedCusIdListener(): LiveData<DocumentSnapshot>
+    fun fetchDeliveryRequestDetails(cusId: String): Task<DocumentSnapshot>
+
 
 
     /**

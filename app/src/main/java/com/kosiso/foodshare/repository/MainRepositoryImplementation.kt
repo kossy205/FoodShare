@@ -4,6 +4,8 @@ import FoodListing
 import android.app.Activity
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -188,6 +190,44 @@ class MainRepositoryImplementation @Inject constructor(
         return geoFirestore.queryAtLocation(geoPoint, radius)
 
     }
+
+
+    /**
+     * Connecting quest and delivery agent
+     */
+    override fun assignCusToAvailableDeliveryAgent(documentId: String): Task<Void> {
+        val assignCusId = hashMapOf<String, Any>(
+            Constants.ASSIGNED_CUSTOMER_ID to Constants.TRUE
+        )
+        return firestore.collection(Constants.USERS)
+                   .document(documentId)
+                   .update(assignCusId)
+    }
+
+    override fun volunteerCollectionAssignedCusIdListener(): LiveData<DocumentSnapshot>{
+        val livaDate = MutableLiveData<DocumentSnapshot>()
+        firestore.collection(Constants.USERS)
+            .document(getCurrentUser()!!.uid)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Log.i("volunteer Collection Assigned Cus Id Listener failed.", "$e")
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.i("volunteer Collection Assigned Cus Id Listener", "$snapshot")
+                    livaDate.value = snapshot!!
+                }
+            }
+        return livaDate
+    }
+
+    override fun fetchDeliveryRequestDetails(cusId: String): Task<DocumentSnapshot>{
+        return firestore.collection(Constants.DELIVERY_REQUESTS)
+            .document(cusId)
+            .get()
+    }
+
 
 
 
