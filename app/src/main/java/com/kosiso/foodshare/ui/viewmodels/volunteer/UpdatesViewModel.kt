@@ -57,6 +57,16 @@ class UpdatesViewModel @Inject constructor(val mainRepository: MainRepository, v
             }
     }
 
+    fun changeVolunteerAcceptStatus(acceptStatus: String){
+        mainRepository.changeVolunteerAcceptStatus(acceptStatus)
+            .addOnSuccessListener {
+                Log.i("change Volunteer Accept Status", "success: $acceptStatus")
+            }
+            .addOnFailureListener {
+                Log.i("change Volunteer Accept Status", "failure: $it")
+            }
+    }
+
     override fun onCleared() {
         super.onCleared()
         // Remove the observer when the ViewModel is cleared to prevent memory leaks

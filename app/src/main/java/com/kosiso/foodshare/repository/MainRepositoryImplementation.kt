@@ -195,15 +195,19 @@ class MainRepositoryImplementation @Inject constructor(
     /**
      * Connecting quest and delivery agent
      */
-    override fun assignCusToAvailableDeliveryAgent(documentId: String): Task<Void> {
+    override fun assignCusToAvailableDeliveryAgent(deliveryAgentId: String): Task<Void> {
+        // When a volunteer or delivery agent is found by a guest, the volunteer id is gotten by the guest,
+        // ... and in the guest activity, the guest's id is passed to the volunteer "assignedCusId" field of the volunteer using the volunteer id.
+        // That's why you have the "getCurrentUser()!!.uid.toString()" there.
         val assignCusId = hashMapOf<String, Any>(
-            Constants.ASSIGNED_CUSTOMER_ID to Constants.TRUE
+            Constants.ASSIGNED_CUSTOMER_ID to getCurrentUser()!!.uid.toString()
         )
         return firestore.collection(Constants.USERS)
-                   .document(documentId)
+                   .document(deliveryAgentId)
                    .update(assignCusId)
     }
 
+    // for delivery agent to know if they have been found by a guest
     override fun volunteerCollectionAssignedCusIdListener(): LiveData<DocumentSnapshot>{
         val livaDate = MutableLiveData<DocumentSnapshot>()
         firestore.collection(Constants.USERS)
@@ -226,6 +230,34 @@ class MainRepositoryImplementation @Inject constructor(
         return firestore.collection(Constants.DELIVERY_REQUESTS)
             .document(cusId)
             .get()
+    }
+
+    override fun changeVolunteerAcceptStatus(acceptStatus: String): Task<Void> {
+        val hasAcceptStatus = hashMapOf<String, Any>(
+            Constants.HAS_ACCEPTED to acceptStatus
+        )
+        return firestore.collection(Constants.USERS)
+            .document(getCurrentUser()!!.uid.toString())
+            .update(hasAcceptStatus)
+    }
+
+
+    override fun deliveryAcceptStatusListener(deliveryAgentId: String): LiveData<String> {
+        val livaDate = MutableLiveData<String>()
+        firestore.collection(Constants.USERS)
+            .document(deliveryAgentId)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Log.i("delivery Accept Status Listener failed.", "$e")
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.i("volunteer Collection Assigned Cus Id Listener", "$snapshot")
+                    livaDate.value = snapshot.data?.get(Constants.HAS_ACCEPTED).toString()
+                }
+            }
+        return livaDate
     }
 
 

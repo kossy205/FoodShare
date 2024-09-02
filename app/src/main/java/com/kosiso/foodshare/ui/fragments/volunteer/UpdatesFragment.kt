@@ -83,6 +83,14 @@ class UpdatesFragment : Fragment() {
             }
         }
 
+        //bottom sheet button listeners
+        bottomSheetView.findViewById<Button>(R.id.idBtnAccept).setOnClickListener {
+            updatesViewModel.changeVolunteerAcceptStatus(Constants.TRUE)
+        }
+        bottomSheetView.findViewById<TextView>(R.id.idBtnDismiss).setOnClickListener {
+            updatesViewModel.changeVolunteerAcceptStatus(Constants.FALSE)
+        }
+
         //
         updatesViewModel.apply {
             deliveryRequestDetails.observe(viewLifecycleOwner, Observer {result->
