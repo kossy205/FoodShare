@@ -88,6 +88,8 @@ class UpdatesFragment : Fragment() {
             updatesViewModel.changeVolunteerAcceptStatus(Constants.TRUE)
         }
         bottomSheetView.findViewById<TextView>(R.id.idBtnDismiss).setOnClickListener {
+            //once the below is successful, we then return everything back to normal
+            // checkout its onSuccessListener in viewmodel
             updatesViewModel.changeVolunteerAcceptStatus(Constants.FALSE)
         }
 

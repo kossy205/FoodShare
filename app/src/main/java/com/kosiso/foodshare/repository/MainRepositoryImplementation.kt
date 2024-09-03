@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -37,6 +38,7 @@ class MainRepositoryImplementation @Inject constructor(
 ): MainRepository{
 
     private var geoQuery: GeoQuery? = null
+    private lateinit var listenerRegistration: ListenerRegistration
 
     override fun signIn(email: String, password: String): Task<AuthResult> {
         return firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -210,9 +212,9 @@ class MainRepositoryImplementation @Inject constructor(
     // for delivery agent to know if they have been found by a guest
     override fun volunteerCollectionAssignedCusIdListener(): LiveData<DocumentSnapshot>{
         val livaDate = MutableLiveData<DocumentSnapshot>()
-        firestore.collection(Constants.USERS)
+        val query = firestore.collection(Constants.USERS)
             .document(getCurrentUser()!!.uid)
-            .addSnapshotListener { snapshot, e ->
+            listenerRegistration = query.addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.i("volunteer Collection Assigned Cus Id Listener failed.", "$e")
                     return@addSnapshotListener
@@ -244,9 +246,9 @@ class MainRepositoryImplementation @Inject constructor(
 
     override fun deliveryAcceptStatusListener(deliveryAgentId: String): LiveData<String> {
         val livaDate = MutableLiveData<String>()
-        firestore.collection(Constants.USERS)
+        val query = firestore.collection(Constants.USERS)
             .document(deliveryAgentId)
-            .addSnapshotListener { snapshot, e ->
+            listenerRegistration = query.addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.i("delivery Accept Status Listener failed.", "$e")
                     return@addSnapshotListener
@@ -258,6 +260,19 @@ class MainRepositoryImplementation @Inject constructor(
                 }
             }
         return livaDate
+    }
+
+    override fun removeFirebaseListener(){
+        listenerRegistration.remove()
+    }
+
+    override fun changeVolunteerCusAssignedFieldBackToDefault(assignedCusId: String): Task<Void> {
+        val assignCus = hashMapOf<String, Any>(
+            Constants.ASSIGNED_CUSTOMER_ID to assignedCusId
+        )
+        return firestore.collection(Constants.USERS)
+            .document(getCurrentUser()!!.uid.toString())
+            .update(assignCus)
     }
 
 

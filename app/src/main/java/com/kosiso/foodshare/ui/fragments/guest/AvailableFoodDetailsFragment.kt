@@ -99,12 +99,11 @@ class AvailableFoodDetailsFragment : Fragment() {
 
             }
 
-
-
             // button claim
             btnClaim.setOnClickListener{
                 item.let {foodListing ->
                     availableFoodDetailsViewModel.uploadDeliveryRequest(
+                        foodListing?.uid!!,
                         foodListing?.nameOfItem!!,
                         foodListing?.itemDescription!!,
                         foodListing?.foodImg!!,
@@ -121,10 +120,18 @@ class AvailableFoodDetailsFragment : Fragment() {
                 binding.btnClaim.visibility = View.GONE
                 binding.tvCancel.visibility = View.GONE
             }
-
             //button cancel
             tvCancel.setOnClickListener {
                 findNavController().navigate(R.id.action_availableFoodDetailsFragment_to_availableFoodFragment2)
+            }
+            //button to cancel "find delivery agent" incase user changes his/her mind
+            tvLoadingCancel.setOnClickListener {
+                availableFoodDetailsViewModel.removeGeoQueryEventListeners()
+                binding.cvLoading.visibility = View.GONE
+                binding.tvLoadingCancel.visibility = View.GONE
+                binding.btnClaim.visibility = View.VISIBLE
+                binding.tvCancel.visibility = View.VISIBLE
+                Log.i("tv loading cancel clicked", "clicked")
             }
         }
 
@@ -144,8 +151,6 @@ class AvailableFoodDetailsFragment : Fragment() {
                     Utilities.showErrorSnackBar(it.message!!, requireView(), requireContext())
                 }
             })
-
-
             setDeliveryLocationResult.observe(viewLifecycleOwner, Observer {result ->
                 if(result != null){
                     result.onSuccess {
@@ -162,6 +167,30 @@ class AvailableFoodDetailsFragment : Fragment() {
                     Log.e("AvailableFoodDetailsFragment", "Result is null")
                 }
 
+            })
+            deliveryAcceptResult.observe(viewLifecycleOwner, Observer {result->
+                result.onSuccess {
+                    if(it){
+                        // navigate to transit fragment to track deliveries
+                    }else{
+                        Utilities.showNormalSnackBar("Delivery rejected, try again", requireView(), requireContext())
+                        binding.cvLoading.visibility = View.GONE
+                        binding.tvLoadingCancel.visibility = View.GONE
+                        binding.btnClaim.visibility = View.VISIBLE
+                        binding.tvCancel.visibility = View.VISIBLE
+                    }
+                }
+            })
+            listenerRemovedResult.observe(viewLifecycleOwner, Observer {result->
+                result.onSuccess {
+                    if(it){
+                        Utilities.showNormalSnackBar("Search for delivery agent stopped. You can still try again", requireView(), requireContext())
+                        binding.cvLoading.visibility = View.GONE
+                        binding.tvLoadingCancel.visibility = View.GONE
+                        binding.btnClaim.visibility = View.VISIBLE
+                        binding.tvCancel.visibility = View.VISIBLE
+                    }
+                }
             })
         }
 

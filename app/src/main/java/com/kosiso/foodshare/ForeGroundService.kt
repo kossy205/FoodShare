@@ -19,6 +19,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.GeoPoint
 import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.repository.LocationRepository
@@ -37,6 +38,8 @@ class ForeGroundService: LifecycleService(){
     lateinit var locationRepository: LocationRepository
     @Inject
     lateinit var mainRepository: MainRepository
+
+    private lateinit var volunteerCollectionAssignedCusIdObserver: Observer<DocumentSnapshot>
 
     companion object{
         val isTracking = MutableLiveData<Boolean>()
@@ -81,21 +84,21 @@ class ForeGroundService: LifecycleService(){
         }
 
         startForeground(Constants.NOTIFICATION_ID, baseNotificationBuilder.build())
-
     }
 
     private fun killService(){
         Log.i("service 1","stop service")
         postInitialValues()
+        removeVolunteerCollectionAssignedCusIdObserver()
         stopForeground(true)
         stopSelf()
     }
 
 
     private fun volunteerCollectionAssignedCusIdListener(){
-        mainRepository.volunteerCollectionAssignedCusIdListener().observeForever{snapshot->
+        volunteerCollectionAssignedCusIdObserver = Observer {snapshot->
             val assignedCusId = snapshot.data?.get(Constants.ASSIGNED_CUSTOMER_ID)
-            // dont mistake this condition for "(assignedCusId.isNotEmpty)"
+            // don't mistake this condition for "(assignedCusId.isNotEmpty)"
             if(assignedCusId != ""){
                 _assignedCusId.value = assignedCusId.toString()
                 Log.i("assigned cus id", "$assignedCusId")
@@ -103,7 +106,18 @@ class ForeGroundService: LifecycleService(){
                 Log.i("assigned cus id is empty", "empty")
             }
         }
+        mainRepository.volunteerCollectionAssignedCusIdListener()
+            .observeForever(volunteerCollectionAssignedCusIdObserver)
     }
+
+
+    private fun removeVolunteerCollectionAssignedCusIdObserver(){
+        volunteerCollectionAssignedCusIdObserver.let {observer->
+            mainRepository.volunteerCollectionAssignedCusIdListener()
+                .removeObserver(observer)
+        }
+    }
+
 
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean){
@@ -112,6 +126,7 @@ class ForeGroundService: LifecycleService(){
             locationRepository.getLocationUpdates(
                 {location ->
                 val geoPoint = GeoPoint(location.latitude, location.longitude)
+                mainRepository.setLocationUsingGeoFirestore(mainRepository.getCurrentUser()!!.uid, Constants.AVAILABLE_VOLUNTEERS, geoPoint)
                 Log.i("service location","$geoPoint")
                 },{exception ->
                     Log.i("service location exception","$exception")

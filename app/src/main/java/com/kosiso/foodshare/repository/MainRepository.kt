@@ -78,6 +78,8 @@ interface MainRepository {
     fun fetchDeliveryRequestDetails(cusId: String): Task<DocumentSnapshot>
     fun changeVolunteerAcceptStatus(acceptStatus: String): Task<Void>
     fun deliveryAcceptStatusListener(deliveryAgentId: String): LiveData<String>
+    fun removeFirebaseListener()
+    fun changeVolunteerCusAssignedFieldBackToDefault(assignedCusId: String): Task<Void>
 
 
 

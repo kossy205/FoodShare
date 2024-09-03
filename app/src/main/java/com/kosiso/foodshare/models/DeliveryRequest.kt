@@ -5,7 +5,8 @@ import com.google.firebase.firestore.GeoPoint
 
 data class DeliveryRequest(
     val uniqueId:String = "",
-    val uid:String = "",
+    val guestId:String = "",
+    val donorId:String = "",
     val nameOfItem:String = "",
     val itemDescription:String = "",
     val foodImg: String = "",

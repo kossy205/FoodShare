@@ -28,10 +28,11 @@ class UpdatesViewModel @Inject constructor(val mainRepository: MainRepository, v
         listenForAssignedCusId()
     }
 
+
     private fun listenForAssignedCusId(){
         assignedCusIdObserver = Observer<String> { assignedCusId->
             Log.i("assigned cus id 2", assignedCusId)
-            // dont mistake the below condition for "(assignedCusId.isNotEmpty)"
+            // don't mistake the below condition for "(assignedCusId.isNotEmpty)"
             if (assignedCusId != "") {
                 fetchDeliveryRequestDetails(assignedCusId)
             }else{
@@ -60,11 +61,30 @@ class UpdatesViewModel @Inject constructor(val mainRepository: MainRepository, v
     fun changeVolunteerAcceptStatus(acceptStatus: String){
         mainRepository.changeVolunteerAcceptStatus(acceptStatus)
             .addOnSuccessListener {
+                returnEverythingToDefault()
                 Log.i("change Volunteer Accept Status", "success: $acceptStatus")
             }
             .addOnFailureListener {
                 Log.i("change Volunteer Accept Status", "failure: $it")
             }
+    }
+
+    private fun changeVolunteerCusAssignedFieldBackToDefault(assignedCusId: String){
+        mainRepository.changeVolunteerCusAssignedFieldBackToDefault(assignedCusId)
+            .addOnSuccessListener {
+                returnEverythingToDefault()
+                Log.i("change Volunteer Cus Assigned Field Back To Default", "success: $assignedCusId")
+            }
+            .addOnFailureListener {
+                Log.i("change Volunteer Cus Assigned Field Back To Default", "failure: $it")
+            }
+    }
+
+
+    private fun returnEverythingToDefault(){
+        // returns "hasAccepted" back to ""
+        changeVolunteerAcceptStatus("")
+        changeVolunteerCusAssignedFieldBackToDefault("")
     }
 
     override fun onCleared() {
@@ -73,5 +93,6 @@ class UpdatesViewModel @Inject constructor(val mainRepository: MainRepository, v
         assignedCusIdObserver?.let {
             ForeGroundService.assignedCusId.removeObserver(it)
         }
+        mainRepository.removeFirebaseListener()
     }
 }
