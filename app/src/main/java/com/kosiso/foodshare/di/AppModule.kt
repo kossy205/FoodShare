@@ -7,6 +7,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.ListenerRegistration
 import com.kosiso.foodshare.other.Constants
 import com.kosiso.foodshare.repository.LocationRepository
 import com.kosiso.foodshare.repository.LocationRepositoryImplementation
@@ -81,5 +82,4 @@ object AppModule {
             interval = 5000 // 5 seconds
         }
     }
-
 }
